@@ -1,8 +1,11 @@
 ﻿using Fantome.Libraries.League.IO.MapGeometry;
+using Fantome.Libraries.League.IO.BIN;
 using Fantome.Libraries.League.IO.SimpleSkinFile;
 using Fantome.Libraries.League.IO.SkeletonFile;
 using Fantome.Libraries.League.IO.StaticObjectFile;
 using Fantome.Libraries.League.IO.WGT;
+using Fantome.Libraries.League.IO.NVR;
+using Fantome.Libraries.League.IO.LightDat;
 using ImageMagick;
 using lol2gltf.Core.ConversionOptions;
 using SharpGLTF.Schema2;
@@ -46,10 +49,17 @@ namespace lol2gltf.Core
 
         public static void ConvertMapGeometryToGltf(ConvertMapGeometryToGltf opts)
         {
-            MapGeometry mapGeometry = ReadMapGeometry(opts.MapGeometryPath);
+            MapGeometry mapGeometry = ReadMapGeometry(opts.MapGeometryPath); //Material Support missing
             ModelRoot gltf = mapGeometry.ToGLTF();
-
             gltf.Save(opts.OutputPath);
+        }
+
+        public static void ConvertSimpleEnvironmentToGltf(ConvertSimpleEnvironmentToGltf opts) // NVR -> GLTF not supported yet
+        {
+            NVRFile NVRModel = ReadNVR(opts.SimpleEnvironmentPath);
+            LightDatFile LightFile = ReadLightDAT(opts.PointLightPath);
+
+            NVRModel.Write(opts.SimpleEnvironmentPath);
         }
 
         // ------------- BACKING FUNCTIONS ------------- \\
@@ -99,6 +109,28 @@ namespace lol2gltf.Core
             catch (Exception exception)
             {
                 throw new Exception("Error: Failed to read map geometry file", exception);
+            }
+        }
+        private static NVRFile ReadNVR(string location)
+        {
+            try
+            {
+                return new NVRFile(location);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error: Failed to read simple environment file", exception);
+            }
+        }
+        private static LightDatFile ReadLightDAT(string location)
+        {
+            try
+            {
+                return new LightDatFile(location);
+            }
+            catch (Exception exception)
+            {
+                throw new Exception("Error: Failed to read light data file", exception);
             }
         }
         private static ModelRoot ReadGltf(string location)

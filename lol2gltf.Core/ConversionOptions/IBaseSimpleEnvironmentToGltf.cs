@@ -3,15 +3,13 @@ using System.Collections.Generic;
 
 namespace lol2gltf.Core.ConversionOptions
 {
-    public interface IBaseMapGeometryToGltf
+    public interface IBaseSimpleEnvironmentToGltf
     {
-        public string MapGeometryPath { get; set; }
+        public string SimpleEnvironmentPath { get; set; }
 
         public Dictionary<string, MagickImage> MaterialTextures { get; set; }
 
-        public Dictionary<string, MagickImage> BakedMaterialTextures { get; set; } 
-
-        public string MaterialBINPath { get; set; }
+        public string PointLightPath { get; set; } 
 
         public string OutputPath { get; set; }
     }
