@@ -19,9 +19,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/Crauzer/lol2gltf/wiki">
-      <h1 align="center"> How to use </h1>
-  </a>
+      <h1 align="center"> 
+        <a href="https://github.com/Crauzer/lol2gltf/wiki">How to use</a> 
+        | 
+        <a href="https://www.youtube.com/watch?v=XxSGk6SAcAM">Video Tutorial</a> 
+      </h1>
 </p>
 
 * Features:
@@ -32,7 +34,6 @@
 * * Texture bundling (SKN)
 
 * Upcoming features:
-* * Non-cmd Application with a good looking UI
 * * Converting glTF back to SKN, SKL and ANM
 * * FBX -> SKN + SKL
 
